@@ -1,6 +1,7 @@
+import os
 import phonenumbers
 from phonenumbers import carrier, geocoder
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -29,4 +30,6 @@ def get_phone_info(phone_number):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use the PORT environment variable provided by Render
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
